@@ -16,8 +16,8 @@ def upload(request):
         form = DocumentForm(request.POST, request.FILES)
         if form.is_valid():
             files = request.FILES.getlist('upload')
-            for _file in files:
-                Document.objects.create(upload=_file)
+            for f in files:
+                Document.objects.create(upload=f)
             return redirect('dashboard')
         form = DocumentForm()
     return render(request, 'dashboard/upload.html', {'form': form})
