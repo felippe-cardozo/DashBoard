@@ -22,4 +22,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.dashboard, name='dashboard'),
     url("^soc/", include("social_django.urls", namespace="social")),
+    url(r'^upload/', views.upload, name='upload'),
 ]
