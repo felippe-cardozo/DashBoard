@@ -5,7 +5,10 @@ Task tem muitos Documentos;
 
 S3: Acho que essa foi a parte mais desafiadora, levei bastante tempo entendendo a maneira como o Django se comunica com o AWS através da biblioteca boto3. 
 
-Meu projeto inicial consistia em salvar os uploads do usuário em uma pasta temporária, depois upá-los para o bucket no S3 de maneira assincrônica, utilizando Celery + Redis. Só depois de algum tempo entendi que o S3 suporta Cross Origin Resource Sharing(CORS), o que significa que o usuário pode se conectar diretamente ao bucket no momento do upload, de modo que os arquivos upados não tocam nem o disco nem a memória do servidor. Então salvar os arquivos no servidor e depois ir jogando eles no bucket por async seria duplicar o trabalho, já que é possível upá-los diretamente na s3 através do CORS e ainda guardar metainformação dos arquivos upados na base de dados. 
+Meu projeto inicial consistia em salvar os uploads do usuário em uma pasta temporária, depois upá-los para o bucket no S3 de maneira assincrônica, utilizando Celery + Redis.
+Só depois de algum tempo entendi que o S3 suporta Cross Origin Resource Sharing(CORS), o que significa que o usuário pode se conectar diretamente ao bucket no momento do upload,
+de modo que os arquivos upados não tocam nem o disco nem a memória do servidor. Então salvar os arquivos no servidor e depois ir jogando eles no bucket por async seria 
+duplicar o trabalho, já que é possível upá-los diretamente na s3 através do CORS e ainda guardar metainformação dos arquivos upados na base de dados. 
 
 Sequencialmente, ficou assim:
 usuário cria uma Task,
