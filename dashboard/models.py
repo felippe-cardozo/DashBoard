@@ -15,6 +15,9 @@ class Task(models.Model):
         return [{'link': d.upload.url, 'filename': d.upload.name}
                 for d in self.document_set.all()]
 
+    def remove_from_s3(self):
+        [d.upload.delete() for d in self.document_set.all()]
+
 
 class Document(models.Model):
     uploaded_at = models.DateTimeField(auto_now_add=True)

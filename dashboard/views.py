@@ -1,16 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import logout
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .forms import DocumentForm, TaskForm
 from .models import Document, Task
 from .search import index_to_es
-
-
-@login_required
-def log_out(request):
-    logout(request)
-    return redirect('dashboard')
 
 
 @login_required
@@ -86,7 +79,7 @@ def detail(request, task_id):
 def destroy(request, task_id):
     task = get_object_or_404(Task, pk=task_id)
     if task.document_set.all():
-        [d.upload.delete() for d in task.document_set.all()]
+        task.remove_from_s3()
     task.delete()
     return redirect('dashboard')
 

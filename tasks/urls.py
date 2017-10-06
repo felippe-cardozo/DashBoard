@@ -27,5 +27,4 @@ urlpatterns = [
     url(r'^destroy/(?P<task_id>[0-9]+)/$', views.destroy, name='destroy'),
     url(r'^task/(?P<task_id>[0-9]+)/$', views.detail, name='detail'),
     url(r'^done/(?P<task_id>[0-9]+)/$', views.mark_as_done, name='done'),
-    url(r'^logout/', views.log_out, name='log_out')
 ]
