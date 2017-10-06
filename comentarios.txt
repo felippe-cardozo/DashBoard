@@ -1,0 +1,14 @@
+Model: Desenvolvi o sistema utilizando base de dados relacional. Formulei as relações da seguinte maneira:
+Usuário tem muitas Tasks como autor;
+Usuário tem muitas Tasks que marcou como 'done';
+Task tem muitos Documentos;
+
+S3: Acho que essa foi a parte mais desafiadora, levei bastante tempo entendendo a maneira como o Django se comunica com o AWS através da biblioteca boto3. 
+
+Meu projeto inicial consistia em salvar os uploads do usuário em uma pasta temporária, depois upá-los para o bucket no S3 de maneira assincrônica, utilizando Celery + Redis. Só depois de algum tempo entendi que o S3 suporta Cross Origin Resource Sharing(CORS), o que significa que o usuário pode se conectar diretamente ao bucket no momento do upload, de modo que os arquivos upados não tocam nem o disco nem a memória do servidor. Então salvar os arquivos no servidor e depois ir jogando eles no bucket por async seria duplicar o trabalho, já que é possível upá-los diretamente na s3 através do CORS e ainda guardar metainformação dos arquivos upados na base de dados. 
+
+Sequencialmente, ficou assim:
+usuário cria uma Task,
+se a Task tem um ou mais arquivos eles são upados diretamente pro bucket na s3, sendo que o nome do arquivo, a url do arquivo no bucket e o momento do upload são salvos na database.
+Quando a Task é marcada como done, desaparece do Dashboard e é indexada no elasticsearch.
+Quando a Task é deletada, caso tenha arquivos no S3, eles são deletados primeiro e depois a Task e seus documentos são removidos da base de dados.
