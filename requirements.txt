@@ -8,13 +8,16 @@ defusedxml==0.5.0
 Django==1.11.5
 django-storages==1.6.5
 docutils==0.14
+elasticsearch==5.4.0
+elasticsearch-dsl==5.3.0
 greenlet==0.4.12
 idna==2.6
 jmespath==0.9.3
 kombu==4.1.0
+mock==2.0.0
 msgpack-python==0.4.8
-neovim==0.1.13
 oauthlib==2.0.4
+pbr==3.1.1
 PyJWT==1.5.3
 python-dateutil==2.6.1
 python3-openid==3.1.0
