@@ -1,0 +1,29 @@
+        <!DOCTYPE html>
+        <html>
+                <head>
+                        <meta charset="UTF-8" />
+                        <meta name="viewport" content="width=device-width" />
+                        <title>Editar</title>
+                </head>
+                <body>
+                        <h2>Editar</h2>
+                        <form method="post" accept-charset="utf-8" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                {{ t_form.as_p }}
+                                {{ d_form.as_p }}
+                                {% if docs %}
+                                <h3>Anexos</h3>
+                                {% for d in docs %}
+                                <p>{{d.upload.name}}
+                                <input type="checkbox" name="documents" value="{{d.pk}}"> remover
+
+                                </p>
+                                {% endfor %}
+                                {% endif %}
+                                <button type="submit">Submit</button>
+                                
+                        </form>
+                        <br />
+                        <a href="{% url 'detail' task_id %}">Back</a>
+                </body>
+        </html>

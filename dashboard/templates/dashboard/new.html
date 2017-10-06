@@ -1,11 +1,12 @@
-{% extends 'dashboard/base.html' %}                        
-{% block title %} Update {% endblock %}
+{% extends 'dashboard/base.html' %}                   
+{% block title %} New Task {% endblock %}
 {% block body %}
-<form method="post" accept-charset="utf-8" enctype="multipart/form-data">
+<h2>Create a new Tag</h2>
+                        <form method="post" accept-charset="utf-8" enctype="multipart/form-data">
                                 {% csrf_token %}
                                 {{ t_form.as_p }}
                                 {{ d_form.as_p }}
                                 <button type="submit">Submit</button>
                                 
                         </form>
-{% end block %}
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'dashboard/base.html' %}
+{% block title %} {{task.name}} {% endblock %}
+{% block body %}
+<h2>{{task.name}}</h2>
+<p>{{task.description}}</p>
+<p>Prioridade: {{task.priority}}</p>
+<p>status: {{task.status}}</p>
+<p>Postada por: {{task.author.first_name}} {{task.author.last_name}}</p>        
+{% if docs %}
+<h3>Anexos</h3>
+{% for doc in docs %}
+<p>
+<a href="{{doc.upload.url}}" target="_blank">{{doc.upload.name}}</a>
+</p>
+{% endfor %}
+{% endif %}
+<a href="{% url 'update' task.pk %}">Editar</a>
+<a href="{% url 'destroy' task.pk %}" onclick="return confirm('Tem certeza?')">Deletar</a>
+{% endblock %}
