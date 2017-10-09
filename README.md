@@ -1,4 +1,4 @@
-* DASHBOARD
+## DASHBOARD
 
 - clone repo
 - cd DashBoard
@@ -7,6 +7,6 @@
 - install and run elasticsearch
 - ./manage.py migrate
 - ./manage.py test
-- ./manage.py runserver
 - export GOOGLE_KEY, GOOGLE_SECRET, AWS_ID, AWS_SECRET
+- ./manage.py runserver
 - http://localhost:8000 in your browser
