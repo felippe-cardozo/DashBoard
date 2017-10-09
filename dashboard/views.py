@@ -22,7 +22,7 @@ def dashboard(request):
 
 @login_required
 def new(request):
-    task_form = TaskForm
+    task_form = TaskForm()
     document_form = DocumentForm()
     if request.method == 'POST':
         task_form = TaskForm(request.POST)
@@ -78,10 +78,12 @@ def detail(request, task_id):
 @login_required
 def destroy(request, task_id):
     task = get_object_or_404(Task, pk=task_id)
-    if task.document_set.all():
-        task.remove_from_s3()
-    task.delete()
-    return redirect('dashboard')
+    if request.method == 'POST':
+        if task.document_set.all():
+            task.remove_from_s3()
+        task.delete()
+        return redirect('dashboard')
+    return redirect('detail', task_id=task.pk)
 
 
 @login_required
